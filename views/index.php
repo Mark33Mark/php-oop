@@ -1,13 +1,36 @@
 <!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-    </head>
+<html lang="EN">
+    <?php include '../app/utils/header.php'; ?>
+    <style>
+        <?php include '../app/styles/styles.css' ?>
+    </style>
     <body>
-        Home Page
+    <header>
+        <div class='header-image-wrapper'></div>
+        <button id="btn-report" title="click for report">Report</button>
+        <script>
+            const btn = document.getElementById('btn-report');
+            btn.addEventListener('click', () => { document.location.href = '/transactions'; });
+        </script>
+    </header>
+
+    <br /><hr />
+
+    <h3>Upload your transaction file here to save to the database.</h3><br />
+
+    <form method='POST' enctype='multipart/form-data' action='/' >
+
+        <label>📂 Select the .csv file you want to upload:</label>
+        <input type="file" id="user_upload" name="user_upload" />
+
+        <button type='submit'>upload</button>
+
+    </form>
+
+    <br /><hr /><br />
+
+
+
     </body>
+
 </html>

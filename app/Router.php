@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App;
 
@@ -13,7 +13,6 @@ class Router
     public function register(string $requestMethod, string $route, callable|array $action): self
     {
         $this->routes[$requestMethod][$route] = $action;
-
         return $this;
     }
 
@@ -27,11 +26,9 @@ class Router
         return $this->register('post', $route, $action);
     }
 
-    public function routes(): array
-    {
-        return $this->routes;
-    }
-
+    /**
+     * @throws RouteNotFoundException
+     */
     public function resolve(string $requestUri, string $requestMethod)
     {
         $route = explode('?', $requestUri)[0];
