@@ -19,6 +19,9 @@ class View
         return new static($view, $params);
     }
 
+    /**
+     * @throws ViewNotFoundException
+     */
     public function render(): string
     {
         $viewPath = VIEW_PATH . '/' . $this->view . '.php';
@@ -31,13 +34,23 @@ class View
             $$key = $value;
         }
 
+        // object buffering, is a way to collect data that would
+        // otherwise be sent to the browser.
+        // It creates a seamless transfer from:
+        // php engine -> apache -> operating system -> web user
         ob_start();
 
         include $viewPath;
 
+        // Returns the contents of the output buffer and ends
+        // output buffering. If output buffering isn't active
+        // then false is returned.
         return (string) ob_get_clean();
     }
 
+    /**
+     * @throws ViewNotFoundException
+     */
     public function __toString(): string
     {
         return $this->render();
